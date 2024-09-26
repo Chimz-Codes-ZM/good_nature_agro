@@ -16,11 +16,13 @@ export default function Dashboard() {
         try {
             const currentResponse = await axios.get("/api/current-weather", {
                 params: { city, country_code: countryCode },
+                withCredentials: true
             });
             setCurrentWeather(currentResponse.data);
 
             const forecastResponse = await axios.get("/api/forecast", {
                 params: { city, country_code: countryCode },
+                withCredentials: true
             });
             setForecast(forecastResponse.data);
 
@@ -32,7 +34,9 @@ export default function Dashboard() {
 
     const fetchSearchHistory = async () => {
         try {
-            const response = await axios.get("/api/search-history");
+            const response = await axios.get("/api/search-history", {
+                withCredentials: true
+            });
             setSearchHistory(response.data);
         } catch (error) {
             console.error("Error fetching the search history data: ", error);
