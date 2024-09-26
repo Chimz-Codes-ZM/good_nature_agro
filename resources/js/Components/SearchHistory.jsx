@@ -2,7 +2,7 @@ import React from 'react'
 
 export const SearchHistory = ({ history, onSelect }) => {
   return (
-    <div>
+    <div className='text-white'>
         <h2>Search History</h2>
         <ul>
             {history.map((item, index) => (
@@ -14,3 +14,5 @@ export const SearchHistory = ({ history, onSelect }) => {
     </div>
   )
 }
+
+export default SearchHistory

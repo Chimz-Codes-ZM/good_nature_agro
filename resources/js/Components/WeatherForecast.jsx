@@ -22,3 +22,5 @@ const WeatherForecast = ({ data }) => {
         </div>
     )
 }
+
+export default WeatherForecast;
