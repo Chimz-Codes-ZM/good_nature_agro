@@ -34,7 +34,7 @@ class WeatherController extends Controller
         return response()->json($weather);
     }
 
-    public function getForecase(Request $request) 
+    public function getForecast(Request $request) 
     {
         $request->validate([
             'city' => 'required|string',

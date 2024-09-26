@@ -7,7 +7,7 @@ export const SearchHistory = ({ history, onSelect }) => {
         <ul>
             {history.map((item, index) => (
                 <li key={index} onClick={() => onSelect(item)}>
-                    {item.city}, {item.country_code}
+                    {item?.city}, {item?.country_code}
                 </li>
             ))}
         </ul>

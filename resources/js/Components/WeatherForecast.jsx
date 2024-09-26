@@ -10,12 +10,12 @@ const WeatherForecast = ({ data }) => {
                 {data.map((day, index) => (
                     <div key={index}>
                         <h3>{day.datetime}</h3>
-                        <p>Max Temp: {day.max_temp}°C</p>
-                        <p>Min Temp: {day.min_temp}°C</p>
-                        <p>Weather: {day.weather.description}</p>
-                        <p>Precipitation: {day.precip} mm</p>
+                        <p>Max Temp: {day?.max_temp}°C</p>
+                        <p>Min Temp: {day?.min_temp}°C</p>
+                        <p>Weather: {day?.weather.description}</p>
+                        <p>Precipitation: {day?.precip} mm</p>
                         <p>UV Index: {day.uv}</p>
-                        <p>Wind: {day.wind_cdir_full} at {day.wind_spd} m/s</p>
+                        <p>Wind: {day?.wind_cdir_full} at {day?.wind_spd} m/s</p>
                     </div>
                 ))}
             </div>

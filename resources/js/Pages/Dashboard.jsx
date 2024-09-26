@@ -18,7 +18,7 @@ export default function Dashboard() {
                 params: { city, country_code: countryCode },
                 withCredentials: true
             });
-            setCurrentWeather(currentResponse.data);
+            setCurrentWeather(currentResponse.data.data);
 
             const forecastResponse = await axios.get("/api/forecast", {
                 params: { city, country_code: countryCode },
@@ -57,35 +57,36 @@ export default function Dashboard() {
         setCountryCode(item.country_code);
         fetchWeather();
     };
+
     return (
         <AuthenticatedLayout>
             <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-white">Weather Dashboard</h1>
-            <form onSubmit={handleSubmit} className="mb-6">
-                <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Enter city"
-                    className="border p-2 mr-2"
-                    required
-                />
-                <input
-                    type="text"
-                    value={countryCode}
-                    onChange={(e) => setCountryCode(e.target.value)}
-                    placeholder="Country code (e.g., US)"
-                    className="border p-2 mr-2"
-                    required
-                />
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                    Get Weather
-                </button>
-            </form>
-            <CurrentWeather data={currentWeather} />
-            <WeatherForecast data={forecast} />
-            <SearchHistory history={searchHistory} onSelect={handleHistorySelect} />
-        </div>
+                <h1 className="text-3xl font-bold mb-6 text-white">Weather Dashboard</h1>
+                <form onSubmit={handleSubmit} className="mb-6">
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="Enter city"
+                        className="border p-2 mr-2"
+                        required
+                    />
+                    <input
+                        type="text"
+                        value={countryCode}
+                        onChange={(e) => setCountryCode(e.target.value)}
+                        placeholder="Country code (e.g., US)"
+                        className="border p-2 mr-2"
+                        required
+                    />
+                    <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                        Get Weather
+                    </button>
+                </form>
+                <CurrentWeather data={currentWeather} />
+                <WeatherForecast data={forecast} />
+                <SearchHistory history={searchHistory} onSelect={handleHistorySelect} />
+            </div>
         </AuthenticatedLayout>
     );
 }
