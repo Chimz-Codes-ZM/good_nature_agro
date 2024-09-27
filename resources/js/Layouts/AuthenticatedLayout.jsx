@@ -31,7 +31,7 @@ export default function Authenticated({ header, children }) {
                                     Current Weather
                                 </NavLink>
                                 <NavLink
-                                    href={route('dashboard')}
+                                    href={route('forecast')}
                                     active={route().current('forecast')}
                                 >
                                     16-day Forecast

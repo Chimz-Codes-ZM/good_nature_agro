@@ -1,6 +1,6 @@
 import React from "react";
 
-const CurrentWeather = ({ data }) => {
+const ForecastComponent = ({ data }) => {
     if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
         return <div>No weather data available</div>;
     }
@@ -8,7 +8,8 @@ const CurrentWeather = ({ data }) => {
     const weather = data.data[0];
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg">
+
+             <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Current Weather in {weather.city_name}</h2>
             <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -31,8 +32,9 @@ const CurrentWeather = ({ data }) => {
                 <p>Sunrise: {weather.sunrise}</p>
                 <p>Sunset: {weather.sunset}</p>
             </div>
-        </div>
+        </div>  
+     
     );
 };
 
-export default CurrentWeather;
+export default ForecastComponent;
