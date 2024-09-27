@@ -28,7 +28,13 @@ export default function Authenticated({ header, children }) {
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    Dashboard
+                                    Current Weather
+                                </NavLink>
+                                <NavLink
+                                    href={route('dashboard')}
+                                    active={route().current('forecast')}
+                                >
+                                    16-day Forecast
                                 </NavLink>
                             </div>
                         </div>
@@ -132,7 +138,7 @@ export default function Authenticated({ header, children }) {
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
-                            Dashboard
+                            Current Weather
                         </ResponsiveNavLink>
                     </div>
 

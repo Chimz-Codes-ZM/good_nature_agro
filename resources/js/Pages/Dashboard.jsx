@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchHistory from "@/Components/SearchHistory";
-import WeatherForecast from "@/Components/WeatherForecast";
 import CurrentWeather from "@/Components/CurrentWeather";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
@@ -9,26 +8,26 @@ export default function Dashboard() {
     const [city, setCity] = useState("");
     const [countryCode, setCountryCode] = useState("");
     const [currentWeather, setCurrentWeather] = useState(null);
-    const [forecast, setForecast] = useState(null);
     const [searchHistory, setSearchHistory] = useState([]);
+    const [error, setError] = useState(null);
 
     const fetchWeather = async () => {
+        if (!city || !countryCode) {
+            setError("City and country code are required");
+            return;
+        }
+        
         try {
-            const currentResponse = await axios.get("/api/current-weather", {
+            const response = await axios.get("/api/current-weather", {
                 params: { city, country_code: countryCode },
                 withCredentials: true
             });
-            setCurrentWeather(currentResponse.data.data);
-
-            const forecastResponse = await axios.get("/api/forecast", {
-                params: { city, country_code: countryCode },
-                withCredentials: true
-            });
-            setForecast(forecastResponse.data);
-
+            setCurrentWeather(response.data);
+            setError(null);
             fetchSearchHistory();
         } catch (error) {
             console.error("Error fetching the data: ", error);
+            setError("Failed to fetch weather data. Please try again.");
         }
     };
 
@@ -53,9 +52,13 @@ export default function Dashboard() {
     };
 
     const handleHistorySelect = (item) => {
-        setCity(item.city);
-        setCountryCode(item.country_code);
-        fetchWeather();
+        if (item && item.city && item.country_code) {
+            setCity(item.city);
+            setCountryCode(item.country_code);
+            fetchWeather();
+        } else {
+            setError("Invalid history item selected");
+        }
     };
 
     return (
@@ -68,14 +71,14 @@ export default function Dashboard() {
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="Enter city"
-                        className="border p-2 mr-2"
+                        className="border rounded-md p-2 mr-2"
                         required
                     />
                     <input
                         type="text"
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
-                        placeholder="Country code (e.g., US)"
+                        placeholder="Country code (e.g., ZM)"
                         className="border p-2 mr-2"
                         required
                     />
@@ -83,8 +86,8 @@ export default function Dashboard() {
                         Get Weather
                     </button>
                 </form>
-                <CurrentWeather data={currentWeather} />
-                <WeatherForecast data={forecast} />
+                {error && <div className="text-red-500 mb-4">{error}</div>}
+                {currentWeather && <CurrentWeather data={currentWeather} />}
                 <SearchHistory history={searchHistory} onSelect={handleHistorySelect} />
             </div>
         </AuthenticatedLayout>
