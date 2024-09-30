@@ -35,7 +35,7 @@ const WeatherForecast = () => {
     return (
         <AuthenticatedLayout>
             <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-white">Forecast Dashboard</h1>
+            <h1 className="text-3xl font-bold mb-6 dark:text-white">Forecast Dashboard</h1>
                 <form onSubmit={handleSubmit} className="mb-6">
                     <input
                         type="text"

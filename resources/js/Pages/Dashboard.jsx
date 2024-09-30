@@ -55,7 +55,7 @@ export default function Dashboard() {
         if (item && item.city && item.country_code) {
             setCity(item.city);
             setCountryCode(item.country_code);
-            fetchWeather();
+            setError(null);
         } else {
             setError("Invalid history item selected");
         }
@@ -64,14 +64,16 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout>
             <div className="container mx-auto p-4">
-                <h1 className="text-3xl font-bold mb-6 text-white">Weather Dashboard</h1>
-                <form onSubmit={handleSubmit} className="mb-6">
+                <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                    Weather Dashboard
+                </h1>
+                <form onSubmit={handleSubmit} className="mb-6 flex flex-wrap">
                     <input
                         type="text"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         placeholder="Enter city"
-                        className="border rounded-md p-2 mr-2"
+                        className="border rounded-md p-2 mr-2 mb-2 w-full sm:w-auto dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         required
                     />
                     <input
@@ -79,10 +81,13 @@ export default function Dashboard() {
                         value={countryCode}
                         onChange={(e) => setCountryCode(e.target.value)}
                         placeholder="Country code (e.g., ZM)"
-                        className="border p-2 mr-2"
+                        className="border rounded-md p-2 mr-2 mb-2 w-full sm:w-auto dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         required
                     />
-                    <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white p-2 rounded w-full sm:w-auto"
+                    >
                         Get Weather
                     </button>
                 </form>
@@ -92,4 +97,4 @@ export default function Dashboard() {
             </div>
         </AuthenticatedLayout>
     );
-}
+}    
